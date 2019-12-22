@@ -9,13 +9,13 @@ import { map, filter, catchError, mergeMap } from 'rxjs/operators';
 })
 export class UserService {
 
-  userDatas: User[];
+  users: User[];
 
   constructor(private http: Http) { }
 
   getUsers(): Observable<User[]>{
     return this.http.get("https://jsonplaceholder.typicode.com/users")
-    .pipe(map(x => this.userDatas = x.json()));
-
+    .pipe(map(res => res.json()));
   }
+
 }

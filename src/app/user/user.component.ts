@@ -1,4 +1,9 @@
+import { Http } from '@angular/http';
+import { UserService } from './user.service';
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/user/user';
+import { map, filter, catchError, mergeMap } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-user',
@@ -7,9 +12,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserComponent implements OnInit {
 
-  constructor() { }
+  users: User[];
+
+  constructor(
+    private userService: UserService,
+    private http: Http
+  ) { }
 
   ngOnInit() {
+    this.getDatas();
   }
 
+  getDatas() {
+    this.userService.getUsers()
+    .subscribe(res => this.users = res);
+  }
+ 
 }
